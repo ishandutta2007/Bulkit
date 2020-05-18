@@ -1,0 +1,14 @@
+.z-ind9 {
+    z-index: 999998;
+}
+
+.pageloader {
+    transition:-webkit-transform 0.35s ease-out;
+    -webkit-transition:-webkit-transform 0.35s ease-out;
+    transition:transform 0.35s ease-out;
+    transition:transform 0.35s ease-out, 
+    -webkit-transform 0.35s ease-out;
+    -webkit-transform:translateY(-100%);
+    transform:translateY(-100%);
+    will-change:transform
+}
