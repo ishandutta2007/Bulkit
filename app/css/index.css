@@ -1,8 +1,5 @@
-.z-ind9 {
-    z-index: 999998;
-}
-
 .pageloader {
+    z-index: 999998;
     transition:-webkit-transform 0.35s ease-out;
     -webkit-transition:-webkit-transform 0.35s ease-out;
     transition:transform 0.35s ease-out;
@@ -10,5 +7,117 @@
     -webkit-transform 0.35s ease-out;
     -webkit-transform:translateY(-100%);
     transform:translateY(-100%);
-    will-change:transform
+    will-change:transform;
+    background:linear-gradient(-45deg, #8E2DE2, #4A00E0, #4A00E0, #8E2DE2);
+    background-size:400% 400%;
+    -webkit-animation:gradientBG 15s ease infinite;
+    animation:gradientBG 15s ease infinite;
+}
+
+.infraloader { 
+    z-index:-1;
+    -webkit-transition:opacity .35s;
+    transition:opacity .35s
+}
+
+.hero.main-hero {
+    background:linear-gradient(-45deg, #8E2DE2, #4A00E0, #4A00E0, #8E2DE2);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.hero {
+    -webkit-box-align: stretch;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+}
+
+.navbar-wrapper.is-cloned {
+    transform: translateY(-100%);
+    z-index: 100;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.12);
+}
+
+.navbar-item {
+    -webkit-box-flex: 0;
+    color: #4a4a4a;
+    outline: none !important;
+}
+
+@media screen and (min-width: 1024px){
+    .navbar-item, .navbar-link {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+    }
+}
+
+.un {
+    display: inline-block;
+  }
+  
+.un:after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: black;
+    transition: 300ms;
+}
+  
+.un:hover:after {
+    width: 100%;
+}
+
+.nav-wrap {
+    transition-property: all;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
+.min-h-325 {
+    min-height: 3.25rem;
+}
+
+.navbar {
+    min-height: 3.25rem;
+    -webkit-box-align: stretch;
+}
+
+.navbar>.container {
+
+}
+
+menu.toggle{
+    color: #666;
+    background: transparent;
+    transition: opacity 0.4s;   
+}
+
+span {
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+.icon-line-top{
+    background: #A9ABAC;
+    left: 50%;
+    top: 7px;
+    transition: all 0.2s ease;
+}
+
+.icon-line-center{
+    background: #A9ABAC;
+    left: 50%;
+    top: 11px;
+    transition: all 0.2s ease;
+}
+
+.icon-line-center{
+    background: #A9ABAC;
+    left: 50%;
+    top: 14px;
+    transition: all 0.2s ease;
 }
