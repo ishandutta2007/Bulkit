@@ -2,29 +2,328 @@
     <head>
         <link type= "text/css" href="./public/tailwind.css" rel="stylesheet">
         <link type= "text/css" href="./css/index.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="block fixed inset-0 bg-blue-700 pageloader ease-out transition-transform"></div>
         <div class="block fixed inset-0 bg-white opacity-0 infraloader"></div>
+        <!-- Hero and Navbar -->
         <div class="block relative min-h-screen items-stretch flex flex-col justify-between hero">
-            <nav class="fixed top-0 left-0 w-full bg-white h-16 nav-wrap lg:items-stretch lg:flex lg:navbar">
-                <div class="flex w-full items-stretch container -m-3">
-                    <div class="-ml-3 items-center h-16	flex flex-shrink-0 min-h-325">
-                        <a class="cursor-pointer lg:flex lg:items-center flex-grow-0 flex-shrink-0 navbar-item leading-normal py-2 px-3 relative no-underline" href="">
-                            <img src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/logos/bulkit-mauve.svg">
+            <nav id="navbar" class="fixed hidden w-full navbar-wrapper z-20 transition-all lg:navbar lg:items-stretch lg:flex">
+                <div class="items-stretch flex w-full container xlg:xlg-container flex-grow my-0 mx-auto relative">
+                    <!-- Brand -->
+                    <div class="navbar-brand items-center flex flex-shrink-0">
+                        <a class="cursor-pointer lg:items-center lg:flex lg:navbar-item flex-grow-0 flex-shrink-0" href="">
+                            <img id="logo" class="h-8 min-h-1-75 max-w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/logos/bulkit-white.svg">
                         </a>
-                        <a class="navbar-item cursor-pointer lg:items-center lg:flex flex-grow-0 flex-shrink-0" href="">
+                        <!-- Sidebar Trigger -->
+                        <a id="navigation-trigger" class="opacity-100 cursor-pointer lg:items-center lg:flex" href="">
                             <span class="text-xl leading-10 text-center block w-6 h-6 cursor-pointer p-0 my-0 mx-3 opacity-100 relative t-1v">
                                 <span class="relative block w-6 p-6">
-                                    <span>
-                                        <i class="absolute w-5 h-1 mt-4 mr-0 mb-0 ml-3 icon-line-top"></i>
+                                    <span class="rotate">
+                                        <i id="icon-line-top" class="absolute bg-white w-5 h-1-25 icon-line-top"></i>
+                                        <i id="icon-line-center" class="absolute bg-white w-5 h-1-25 icon-line-center"></i>
+                                        <i id="icon-line-bottom" class="absolute bg-white w-5 h-1-25 icon-line-bottom"></i>
                                     </span>
                                 </span>
                             </span>
                         </a>
+                        <!-- Responsive toggle -->
+                        <!-- Manquant -->
+                        <!-- /Responsive toggle -->
+                    </div>
+                    <!-- Navbar menu -->
+                    <div id="is-static" class="lg:flex-grow lg:flex-shrink-0 lg:items-stretch lg:flex">
+                        <!-- Navbar Start -->
+                        <div class="lg:my-auto ml-6 lg:items-stretch lg:flex outline-none">
+                            <!-- Dropdown -->
+                            <div class="lg:navbar-item lg:has-dropdown lg:p-0 lg:flex flex-grow flex-shrink-0 navbar-item is-hoverable lg:static lg:items-stretch is-hidden-mobile">
+                                <div id="product" class="lg:navbar-link lg:items-center lg:flex cursor-pointer py-2 px-3 relative text-white">
+                                    Product
+                                    <svg id="fleche-bas" class="h-5 w-5 transition ease-in-out duration-150" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="p-0 opacity-0 fadeInUp animated lg:bg-white lg:hidden lg;l-0 lg:min-w-full lg:absolute lg:navbar-dropdown">
+                                    
+                                    <!-- Paused (to be continued) -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Navbar end --> 
+                        <div class="lg:justify-end lg:ml-auto lg:items-stretch lg:flex outline-none">
+                            <!-- Navbar item -->
+                            <a id="pricing" class="border-btm text-white cursor-pointer lg:items-center lg:flex flex-grow-0 flex-shrink-0 relative outline-none" href="https://bulkitv2.cssninja.io/landing-kits/kit-7/kit7-pricing.html">
+                                Pricing
+                            </a>
+                            <a id="login" class="border-btm text-white cursor-pointer lg:items-center lg:flex flex-grow-0 flex-shrink-0 relative outline-none" href="https://bulkitv2.cssninja.io/landing-kits/kit-7/kit7-authentications  dc.html">
+                                Login
+                            </a>
+                        <!-- Signup button -->
+                            <div class="text-white lg:items-center lg:flex flex-grow-0 flex-shrink-0 relative py-2 py-3 outline">
+                                <button id="signup" type="button" class="inline-flex items-center px-6 py-3 text-base isRounded bg-fabian border text-white transition-all button">
+                                    Sign Up
+                                  </button>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </nav>
+            <script>
+                $(window).scroll(function() {    
+                    
+                    const scroll = $(window).scrollTop()
+                    const idS = ['#product', '#fleche-bas', '#pricing', '#login']
+                    const icons = ['#icon-line-top', '#icon-line-center', '#icon-line-bottom']
+
+                    if(scroll >= 1) {
+                        $('#navbar').addClass("bg-white")
+                        $('#navbar').css('box-shadow', '0px 8px 6px -6px rgba(0, 0, 0, 0.1)')
+                        $('#logo').attr('src','https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/logos/bulkit-mauve.svg')
+
+                        for (const icon of icons){
+                            $(icon).removeClass("bg-white")
+                            $(icon).addClass("bg-black")
+                        }
+
+                        for (const elt of idS){
+                            $(elt).removeClass("text-white")
+                            $(elt).addClass("text-black")
+                        }
+
+                    } else {
+                        $('#navbar').removeClass("bg-white")
+                        $('#navbar').css('box-shadow', 'none')
+                        $('#logo').attr('src','https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/logos/bulkit-white.svg')
+
+                        for (const icon of icons){
+                            $(icon).removeClass("bg-black")
+                            $(icon).addClass("bg-white")
+                        }
+
+                        for (const elt of idS){
+                            $(elt).removeClass("text-black")
+                            $(elt).addClass("text-white")
+                        }
+                    }
+                })
+                </script>
+            <div class="square square-1 h-20 w-20 opacity-50 absolute bg-white"></div>
+            <div class="square square-2 w-10 h-10 opacity-50 absolute bg-white"></div>
+            <img class="absolute slant-shape max-w-full h-auto" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/shapes/slant-light.svg">
+            <!-- Hero content -->
+            <div class="flex items-center bg-cover bg-no-repeat flex-grow flex-shrink-0 py-2 px-6">
+                <div class="flex-grow flex-shrink xlg:max-w-1152 mx-auto relative w-auto container">
+                    <div class="hero-caption md:columns w-1173 items-center mb-40 flex flex-row mx-auto">
+                        <div class="relative block flex-shrink flex-grow p-3 column is-7">
+                            <img class="relative h-auto max-w-full laptop levitate" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/illustrations/mockups/iso-laptop-no-shadow-app.png">
+                            <img class="absolute top-0 left-0 h-full w-full z-0 max-w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/shapes/shadow.png">
+                        </div>
+                        <div class="column is-5 is-hero-title">
+                            <h1 class="title text-white font-semibold break-words mb-2 p-0 text-6xl block">                            More Leads & Prospects.
+                            </h1>
+                            <h2 class="text-2xl text-white font-normal leading-tight break-words mt-0 mb-5 p-0 block">
+                                Work with people differently.
+                            </h2>
+                            <div class="items-stretch flex flex-wrap justify-start outline-none block">
+                                <a class="py-1-375 px-10 mb-2 mr-2 isRounded transition-all button bg-white border text-tx border-db cursor-pointer justify-center text-center whitespace-no-wrap
+                                items-center shadow-none inline-flex text-base h-10 leading-tight relative align-top select-none outline-none no-underline" href="#">
+                                    Get Started
+                                </a>
+                                <a class="border-fabian bg-fabian text-white transition-all button py-1-375 px-10 isRounded border cursor-pointer justify-center text-center whitespace-no-wrap
+                                items-center shadow-none inline-flex text-base h-10 leading-tight relative align-top " href="#">
+                                    Try For Free
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section block">
+            <!--Squares-->
+            <div class="top-5 h-20 w-20 opacity-50 bg-fabian absolute square-4 transform rotate-36"></div>
+            <div class="top-220 h-10 w-10 bg-square-5 absolute square-5 transform rotate-24"></div>
+            <div class="top-60 h-10 w-10 absolute opacity-50 square-6 transform rotate-36"></div>
+            <div class="top-80 h-10 w-10 absolute opacity-50 square-7 transform rotate-146"></div>
+            <!-- Container -->
+            <div class="container xlg:max-w-1152 lg:max-w-960 flex-grow my-0 mx-auto relative w-auto outline-none block">
+                <div class="block text-center outline-none">
+                    <h2 class="mb-0-375 text-h2 text-tx title marketing-title">Supercharge your Marketing</h2>
+                    <h4 class="text-h4 text-999 font-normal m-0 p-0">Discover a customer segmentation platform where everything is easy to do.</h4>
+                </div>
+                <!--Quick signup-->
+                <div class="block py-1-875 px-0 w-full max-w-640 my-0 mx-auto outline-none">
+                    <div class="block relative clear-both text-base outline-none flex justify-end">
+                        <input class="h-2-875 pl-5 pb-2 text-87 input inputTextProps isRounded transition-all max-w-full w-full bg-white items-center
+                        justify-start leading-normal relative align-top m-0 normal-case text-left shadow-none" type="text" placeholder="Enter your work Email">
+                        <button class="absolute top-0 right-0 block h-2-875 bg-fabian border-fabian text-white font-medium
+                        isRounded input-btn transition-all border cursor-pointer justify-center text-center whitespace-no-wrap
+                        items-center shadow-none text-base leading-normal align-top select-none inputTextProps min-w-160">Try For Free</button>
+                    </div>
+                </div>
+                <!--Small features-->
+                <div class="outline-none flex justify-center text-999">
+                    <span class="flex items-center mx-6">
+                        <i><svg class="w-3 h-3 fill-current font-black mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg></i>
+                        <small>14-day trial</small>
+                    </span>
+                    <span class="flex items-center mx-6">
+                        <i><svg class="w-3 h-3 fill-current text-bold mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg></i>
+                        <small>No credit card required</small>
+                    </span>
+                    <span class="flex items-center mx-6">
+                        <i><svg class="w-3 h-3 fill-current text-bold mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg></i>
+                        <small>All in one plan</small>
+                    </span>
+                </div>
+                <!--App-->
+                <div class="pt-20 pb-0 px-0 outline-none">
+                    <!--Icon features-->
+                    <div class="flex items-center justify-between max-w-640 my-0 mx-auto outline-none">
+                        <div class="text-center w-25-pt app-feature">
+                            <img class="block max-w-12 mt-0 mb-3 mx-auto h-auto text-center" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/icons/1.svg">
+                            <h3 class="font-semibold text-segment ml-3 pb-6 app-feature-h3 m-0 p-0">Segment</h3>
+                        </div>
+                        <div class="text-center w-25-pt app-feature">
+                            <img class="block max-w-12 mt-0 mb-3 mx-auto h-auto text-center" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/icons/2.svg">
+                            <h3 class="font-semibold text-segment ml-3 pb-6 app-feature-h3 m-0 p-0">Tracking</h3>
+                        </div>
+                        <div class="text-center w-25-pt app-feature">
+                            <img class="block max-w-12 mt-0 mb-3 mx-auto h-auto text-center" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/icons/3.svg">
+                            <h3 class="font-semibold text-segment ml-3 pb-6 app-feature-h3 m-0 p-0">Onboarding</h3>
+                        </div>
+                        <div class="text-center w-25-pt app-feature">
+                            <img class="block max-w-12 mt-0 mb-3 mx-auto h-auto text-center" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/icons/4.svg">
+                            <h3 class="font-semibold text-segment ml-3 pb-6 app-feature-h3 m-0 p-0">Sales</h3>
+                        </div>
+                    </div>
+                    <!--Mockup wrapper-->
+                    <div class="relative w-full max-w-5xl my-0 mx-auto p-3-75 outline-none">
+                        <div class="absolute bottom-40 right-m-22 h-180 w-180 rounded-2-25 bg-fabian square-3 transform rotate-38 outline-none"></div>
+                        <img class="relative block marketing h-auto w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/illustrations/UI/marketing-app.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section block ">
+            <div class="container xlg:max-w-1152 lg:max-w-960 flex-grow my-0 mx-auto relative w-auto outline-none">
+                <!-- Feature -->
+                <div class="md:flex items-center columns outline-none">
+                    <div class="column is-7 p-3 text-center outline-none">
+                        <img class="h-auto max-w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/illustrations/UI/feature-1.png">
+                    </div>
+                    <div class="column is-5">
+                        <h2 class="title break-words p-0 section-title dark-text">Generate Leads</h2>
+                        <p class="section-feature-description m-0 p-0 block">Lorem ipsum dolor sit amet, clita laoreet ne cum. His cu harum inermis
+                            iudicabit. Ex vidit fierent hendrerit eum, sed stet periculis ut. Vis in probo decore labitur.
+                        </p>
+                    </div>
+                </div>
+                <!-- Feature -->
+                <div class="md:flex items-center columns outline-none ">
+                    <div class="column is-7 p-3 outline-none lg:hidden md:hidden text-center">
+                        <img class="h-auto max-w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/illustrations/UI/feature-2.png">
+                    </div>
+                    <div class="column is-5">
+                        <h2 class="title break-words p-0 section-title dark-text">Set Up Workflows</h2>
+                        <p class="section-feature-description m-0 p-0 block">Lorem ipsum dolor sit amet, clita laoreet ne cum. His cu harum inermis
+                            iudicabit. Ex vidit fierent hendrerit eum, sed stet periculis ut. Vis in probo decore labitur.
+                        </p>
+                    </div>
+                    <div class="column is-7 p-3 text-center outline-none">
+                        <img class="h-auto max-w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/illustrations/UI/feature-2.png">
+                    </div>
+                </div>
+                <!-- Feature -->
+                <div class="md:flex items-center columns outline-none">
+                    <div class="column is-7 p-3 text-center outline-none">
+                        <img class="h-auto max-w-full" src="https://bulkitv2.cssninja.io/landing-kits/kit-7/assets/img/illustrations/UI/feature-3.png">
+                    </div>
+                    <div class="column is-5">
+                        <h2 class="title break-words p-0 section-title dark-text">Track Your Tasks</h2>
+                        <p class="section-feature-description m-0 p-0 block">Lorem ipsum dolor sit amet, clita laoreet ne cum. His cu harum inermis
+                            iudicabit. Ex vidit fierent hendrerit eum, sed stet periculis ut. Vis in probo decore labitur.
+                        </p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="section block">
+            <div class="container xlg:max-w-1152 lg:max-w-960 flex-grow my-0 mx-auto relative w-auto outline-none">
+                <div class="text-center outline-none">
+                    <h2 class="title mb-0-375 text-h2 dark-text">Why our customers choose Bulkit</h2>
+                    <h4 class="text-h4 text-999 font-normal m-0 p-0">For those with the taste of excellence.</h4>
+                </div>
+                <div class="py-10 px-0 max-w-840 my-0 mx-auto outline-none">
+                    <div class="mb-1-875 relative block select-none slick-slider outline-none">
+                        <div class="absolute w-3-125 h-3-125 left-m-60 flex slick-custom items-center justify-center bg-white cursor-pointer transition-all">
+                            <i><svg class="right-2 relative w-4 fill-current fa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7.05 9.293L6.343 10 12 15.657l1.414-1.414L9.172 10l4.242-4.243L12 4.343z"/></svg></i>
+                        </div>
+                        <!--Carousel item-->
+                        <div class="slick-list relative overflow-hidden block m-0 p-0 outline-none">
+                            <div class="opacity-100 w-7560 relative left-0 top-0 block mx-auto outline-none">
+                                <!-- FROM Tailwind UI -->
+                                <div class="flex flex-col rounded-lg shadow-lg border overflow-hidden">
+                                    <div class="flex-shrink-0">
+                                      <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt="" />
+                                    </div>
+                                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                                      <div class="flex-1">
+                                        <p class="text-sm leading-5 font-medium text-indigo-600">
+                                          <a href="#" class="hover:underline">
+                                            Blog
+                                          </a>
+                                        </p>
+                                        <a href="#" class="block">
+                                          <h3 class="mt-2 text-xl leading-7 font-semibold text-gray-900">
+                                            Boost your conversion rate
+                                          </h3>
+                                          <p class="mt-3 text-base leading-6 text-gray-500">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.
+                                          </p>
+                                        </a>
+                                      </div>
+                                      <div class="mt-6 flex items-center">
+                                        <div class="flex-shrink-0">
+                                          <a href="#">
+                                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                          </a>
+                                        </div>
+                                        <div class="ml-3">
+                                          <p class="text-sm leading-5 font-medium text-gray-900">
+                                            <a href="#" class="hover:underline">
+                                              Roel Aufderhar
+                                            </a>
+                                          </p>
+                                          <div class="flex text-sm leading-5 text-gray-500">
+                                            <time datetime="2020-03-16">
+                                              Mar 16, 2020
+                                            </time>
+                                            <span class="mx-1">
+                                              &middot;
+                                            </span>
+                                            <span>
+                                              6 min read
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- FROM Tailwind UI -->
+                            </div>
+                        </div>
+                        <!--Carousel item-->
+                        <!--Carousel item-->
+                        <!--Carousel item-->
+                        <!--Carousel item-->
+                        <div class="absolute w-3-125 h-3-125 right-m-60 flex slick-custom items-center justify-center bg-white cursor-pointer transition-all">
+                            <i><svg class="left-2 relative w-4 fill-current fa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
